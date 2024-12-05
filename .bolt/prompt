@@ -1,0 +1,70 @@
+For all designs I ask you to make, have them be beautiful, not cookie cutter. Make webpages that are fully featured and worthy for production.
+
+By default, this template supports JSX syntax with Tailwind CSS classes, React hooks, and Lucide React for icons. Do not install other packages for UI themes, icons, etc unless absolutely necessary or I request them.
+
+Use icons from lucide-react for logos.
+
+Software Name:
+Otternaut
+
+Software Overview:
+Otternaut is a sales enablement tool focused on lead management and campaign automation for small to medium-sized businesses. It prioritizes scalability, user-friendliness, and seamless integrations.
+
+Development Goals (Milestone 7 - Debugging Custom Fields and Lead Scoring):
+1. Fix the following issues with the Profile page's Custom Fields tab:
+   - **Lead Sources**:
+     - Adding/removing custom sources works, but the default "Social-Media" disappears.
+     - Cannot save updates to default lead sources ("Failed to update default sources").
+     - Defaults like "Referral," "Website," and others are not updating or saving properly.
+   - **Lead Stages**:
+     - Adding custom stages fails ("Failed to add lead stage").
+     - Cannot save removal or restoration of default lead stages ("Failed to update default values").
+   - **Service Types**:
+     - Default service types are not appearing on lead dialogs, customer dialogs, or filters.
+     - Adding/removing custom types works, but saving/removing/restoring defaults fails.
+   - **Service Frequencies**:
+     - Cannot save removal or restoration of default service frequencies.
+
+2. Ensure proper synchronization between the codebase and Supabase:
+   - All files in the `db-scripts` folder represent SQL queries that have already been executed in Supabase. These include earlier changes to the database structure and logic. If needed, inspect earlier SQL files to understand dependencies or potential discrepancies.
+   - The first query executed is "1.1-leads-customers-profile-table.sql" and the last query executed is `3.4-scoreupdatedcolumn.sql`. Queries up to this point should be treated as active in Supabase.
+   - The following SQL files may have caused discrepancies and should be inspected closely:
+     - `2.9-leadscoring-parameters.sql`
+     - `3.1-recalculatescores.sql`
+     - `3.2-syncstageweights.sql`
+     - `3.3-syncuserprofiles.sql`
+     - `3.4-scoreupdatedcolumn.sql`
+   - **Do not edit existing SQL files** in the `db-scripts` folder. If new queries are required, provide them as new files (e.g., "3.5-...", "3.6-...").
+
+3. Goals:
+   - Ensure changes to Custom Fields (Lead Sources, Stages, Service Types, and Frequencies) save and propagate correctly across the platform.
+   - Fix issues with saving/restoring defaults and ensure "Social-Media" remains functional.
+   - Integrate these changes with the lead scoring algorithm, ensuring proper recalculations based on updated inputs.
+
+4. Ensure real-time updates:
+   - Lead scores recalculate when:
+     - Custom Fields are updated.
+     - Interactions or messages are logged.
+     - Edits are made to leads.
+
+File Organization:
+- Group lead scoring logic in a `LeadScoring` utility file.
+- Store Profile page components and API hooks in a `Profile` folder.
+- Maintain modular, reusable file structures.
+
+Guidelines for Code Structure:
+1. Write reusable, modular functions for handling profile updates and lead scoring.
+2. Keep the lead scoring algorithm flexible to accommodate dynamic inputs.
+3. Limit file sizes to 200-250 lines for better readability and debugging.
+
+Core Stack:
+1. React for the frontend.
+2. Tailwind CSS for styling (with shadcn/ui components).
+3. Supabase for storing and retrieving lead data, scoring parameters, and profile settings.
+
+Principles:
+1. Maintain simplicity and clarity in both the UI and logic.
+2. Ensure the scoring system and profile settings are intuitive and functional.
+3. Preserve performance with real-time updates, even for large datasets.
+
+
